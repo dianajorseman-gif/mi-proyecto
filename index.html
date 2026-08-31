@@ -2,102 +2,98 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi Panel de Control - Horarios, Hábitos y Tareas</title>
+  <title>Mi Panel de Control Personal</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f6f9; }
-    h1 { color: #333; }
-    h2 { color: #2c3e50; margin-top: 30px; border-bottom: 2px solid #2c3e50; padding-bottom: 5px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; }
+    body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f7f6; }
+    h1 { color: #1a252f; }
+    h2 { color: #2c3e50; border-bottom: 2px solid #34495e; padding-bottom: 5px; margin-top: 30px; }
+    
+    /* Buscador de Consultas */
+    .search-container {
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .search-container input {
+      width: 95%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    /* Tablas */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
     th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
     th { background-color: #2c3e50; color: white; }
-    tr:nth-child(even) { background-color: #f2f2f2; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
   </style>
 </head>
 <body>
 
   <h1>📌 Panel de Control Personal</h1>
 
-  <!-- SECCIÓN 1: TO-DO / ACTIVIDADES -->
-  <h2>✅ Lista de Tareas y Actividades (To-Do)</h2>
-  <table>
+  <!-- BUSCADOR / CONSULTAS -->
+  <div class="search-container">
+    <label for="buscarInput"><strong>🔍 Consultar Actividades:</strong></label><br><br>
+    <input type="text" id="buscarInput" onkeyup="filtrarTablas()" placeholder="Escribe una fecha, actividad, materia o hábito (ej. Lunes, Repaso, Subir)...">
+  </div>
+
+  <h2>📅 Horario de Clases / Actividades</h2>
+  <table id="tablaHorario">
     <thead>
-      <tr>
-        <th>FECHA</th>
-        <th>HORA</th>
-        <th>ACTIVIDAD</th>
-      </tr>
+      <tr><th>Día / Fecha</th><th>Hora</th><th>Materia / Actividad</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td>14/08/2026</td>
-        <td>10:00</td>
-        <td>leer un libro</td>
-      </tr>
-      <tr>
-        <td>14/08/2026</td>
-        <td>08:00</td>
-        <td>caminata</td>
-      </tr>
-      <tr>
-        <td>14/08/2026</td>
-        <td>17:30</td>
-        <td>dibujar</td>
-      </tr>
-      <tr>
-        <td>15/08/2026</td>
-        <td>11:00</td>
-        <td>leer un libro</td>
-      </tr>
-      <tr>
-        <td>15/08/2026</td>
-        <td>07:30</td>
-        <td>caminata</td>
-      </tr>
+      <tr><td>Lunes</td><td>08:00 - 10:00</td><td>Taller de Sistemas Operativos</td></tr>
+      <tr><td>Martes</td><td>10:00 - 12:00</td><td>Base de Datos</td></tr>
     </tbody>
   </table>
 
-  <!-- SECCIÓN 2: HÁBITOS -->
   <h2>⭐ Registro de Hábitos</h2>
-  <table>
+  <table id="tablaHabitos">
     <thead>
-      <tr>
-        <th>Hábito</th>
-        <th>Frecuencia</th>
-        <th>Estado</th>
-      </tr>
+      <tr><th>Hábito</th><th>Frecuencia</th><th>Estado / Meta</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Lectura</td>
-        <td>Diario</td>
-        <td>En progreso</td>
-      </tr>
-      <tr>
-        <td>Caminata matutina</td>
-        <td>Diario</td>
-        <td>Completado</td>
-      </tr>
+      <tr><td>Repaso de código</td><td>Diario</td><td>Completado</td></tr>
+      <tr><td>Lectura de SO</td><td>3 veces por semana</td><td>En progreso</td></tr>
     </tbody>
   </table>
 
-  <!-- SECCIÓN 3: HORARIOS -->
-  <h2>📅 Horario de Clases</h2>
-  <table>
+  <h2>☑️ Lista de Tareas (To-Do)</h2>
+  <table id="tablaTodo">
     <thead>
-      <tr>
-        <th>Día</th>
-        <th>Hora</th>
-        <th>Materia</th>
-      </tr>
+      <tr><th>Tarea</th><th>Prioridad</th><th>Estado</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Lunes a Viernes</td>
-        <td>Horario de Clases</td>
-        <td>Taller de Sistemas Operativos 1</td>
-      </tr>
+      <tr><td>Subir proyecto a GitHub</td><td>Alta</td><td>Completado</td></tr>
+      <tr><td>Preparar consultas SQL</td><td>Media</td><td>Pendiente</td></tr>
     </tbody>
   </table>
+
+  <script>
+    function filtrarTablas() {
+      let input = document.getElementById("buscarInput").value.toLowerCase();
+      let tablas = ["tablaHorario", "tablaHabitos", "tablaTodo"];
+
+      tablas.forEach(idTabla => {
+        let tabla = document.getElementById(idTabla);
+        let filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        for (let i = 0; i < filas.length; i++) {
+          let textoFila = filas[i].textContent.toLowerCase();
+          if (textoFila.includes(input)) {
+            filas[i].style.display = "";
+          } else {
+            filas[i].style.display = "none";
+          }
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
