@@ -3,90 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bazar Carmelito - Gestión de Inventario</title>
+    <title>Mi Panel: Horario, To-Do y Hábitos</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 20px; color: #333; }
+        h1 { text-align: center; color: #1a2a3a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid #3498db; padding-bottom: 5px; color: #2c3e50; }
+        input, select, button { width: 100%; padding: 8px; margin: 5px 0 15px 0; box-sizing: border-box; }
+        button { background: #3498db; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        ul { list-style: none; padding: 0; }
+        li { background: #f8f9fa; margin-bottom: 8px; padding: 10px; border-radius: 4px; border-left: 4px solid #3498db; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Registro de Producto - Bazar Carmelito</h2>
-    <form action="#" method="POST">
-        <div class="form-group">
-            <label for="nombre">Nombre del Producto:</label>
-            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Cuaderno A4">
+    <h1>Panel Personal: Horarios, Tareas y Hábitos</h1>
+
+    <div class="grid">
+        <!-- SECCIÓN 1: HORARIO -->
+        <div class="card">
+            <h2>📅 Registro de Horario</h2>
+            <form id="formHorario">
+                <label>Fecha:</label>
+                <input type="text" id="hFecha" placeholder="Ej: 24/8/2026" required>
+                <label>Hora:</label>
+                <input type="text" id="hHora" placeholder="Ej: 10:00" required>
+                <label>Actividad:</label>
+                <input type="text" id="hActividad" placeholder="Ej: Trabajo" required>
+                <button type="submit">Guardar en Horario</button>
+            </form>
+            <ul id="listaHorario"></ul>
         </div>
-        
-        <div class="form-group">
-            <label for="categoria">Categoría:</label>
-            <input type="text" id="categoria" name="categoria" required placeholder="Ej. Papelería">
+
+        <!-- SECCIÓN 2: TO-DO LIST -->
+        <div class="card">
+            <h2>✅ Lista To-Do</h2>
+            <form id="formTodo">
+                <label>Fecha:</label>
+                <input type="text" id="tFecha" placeholder="Ej: 24/8/2026" required>
+                <label>Hora:</label>
+                <input type="text" id="tHora" placeholder="Ej: 14:00" required>
+                <label>Actividad / Tarea:</label>
+                <input type="text" id="tTarea" placeholder="Ej: Dibujar" required>
+                <button type="submit">Agregar Tarea</button>
+            </form>
+            <ul id="listaTodo"></ul>
         </div>
-        
-        <div class="form-group">
-            <label for="precio">Precio ($):</label>
-            <input type="number" id="precio" name="precio" step="0.01" min="0" required placeholder="0.00">
+
+        <!-- SECCIÓN 3: HÁBITOS -->
+        <div class="card">
+            <h2>🔥 Control de Hábitos</h2>
+            <form id="formHabito">
+                <label>Fecha:</label>
+                <input type="text" id="habFecha" placeholder="Ej: 24/8/2026" required>
+                <label>Hora:</label>
+                <input type="text" id="habHora" placeholder="Ej: 21:00" required>
+                <label>Tiempo:</label>
+                <input type="text" id="habTiempo" placeholder="Ej: 2 minutos" required>
+                <label>Actividad:</label>
+                <input type="text" id="habActividad" placeholder="Ej: Mecanografía" required>
+                <button type="submit">Registrar Hábito</button>
+            </form>
+            <ul id="listaHabitos"></ul>
         </div>
-        
-        <div class="form-group">
-            <label for="stock">Stock Disponible:</label>
-            <input type="number" id="stock" name="stock" min="0" required placeholder="0">
-        </div>
-        
-        <div class="form-group">
-            <label for="fecha_ingreso">Fecha de Ingreso:</label>
-            <input type="date" id="fecha_ingreso" name="fecha_ingreso" required>
-        </div>
-        
-        <button type="submit">Guardar Producto</button>
-    </form>
-</div>
+    </div>
 
 </body>
 </html>
